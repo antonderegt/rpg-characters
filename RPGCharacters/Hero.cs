@@ -17,7 +17,6 @@ namespace RPGCharacters
         protected int BaseIntelligence { get; set; }
         protected int BaseVitality { get; set; }
 
-
         // Total primary attributes
         private int TotalStrength { get; set; }
         private int TotalDexterity { get; set; }
@@ -28,7 +27,6 @@ namespace RPGCharacters
         private int Health { get; set; }
         private int ArmorRating { get; set; }
         private int ElementalResistance { get; set; }
-
 
         public Hero(string name, int strength, int dexterity, int intelligence, int vitality)
         {
