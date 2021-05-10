@@ -16,10 +16,10 @@ namespace RPGCharacters
         public override void LevelUp()
         {
             Level++;
-            BaseVitality += 3;
-            BaseStrength += 1;
-            BaseDexterity += 1;
-            BaseIntelligence += 5;
+            //BaseVitality += 3;
+            //BaseStrength += 1;
+            //BaseDexterity += 1;
+            //BaseIntelligence += 5;
 
             // Compute total attributes
         }
