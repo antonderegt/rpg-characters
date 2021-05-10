@@ -1,6 +1,5 @@
 ﻿namespace RPGCharacters
 {
-
     public enum Slot
     {
         SLOT_HEADER,
