@@ -6,7 +6,9 @@ namespace RPGCharacters
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Mage mage = new Mage("Anton");
+
+            mage.displayStats();
         }
     }
 }

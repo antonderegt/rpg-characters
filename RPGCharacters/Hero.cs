@@ -42,5 +42,22 @@ namespace RPGCharacters
         }
 
         public abstract void LevelUp();
+
+        public void displayStats()
+        {
+            StringBuilder stats = new StringBuilder("\n-- Stats --\n");
+
+            stats.AppendFormat("Name: {0}\n", Name);
+            stats.AppendFormat("Level: {0}\n", Level);
+            stats.AppendFormat("Strength: {0}\n", BaseStrength);
+            stats.AppendFormat("Dexterity: {0}\n", BaseDexterity);
+            stats.AppendFormat("Intelligence: {0}\n", BaseIntelligence);
+            stats.AppendFormat("Health: {0}\n", Health);
+            stats.AppendFormat("Armor Rating: {0}\n", ArmorRating);
+            stats.AppendFormat("Elemental Resistance: {0}\n", ElementalResistance);
+            stats.AppendFormat("DPS: {0}\n", 10);
+
+            Console.WriteLine(stats.ToString());
+        }
     }
 }
