@@ -16,7 +16,7 @@ namespace RPGCharacters
             int newDexterity = BasePrimaryAttributes.Dexterity + (1 * levels);
             int newIntelligence = BasePrimaryAttributes.Intelligence + (8 * levels);
 
-            this.BasePrimaryAttributes = new PrimaryAttributes(newStrength, newDexterity, newIntelligence, newVitality);
+            this.BasePrimaryAttributes = new PrimaryAttributes() { Strength = newStrength, Dexterity = newDexterity, Intelligence = newIntelligence, Vitality = newVitality };
 
             Level += 1 * levels;
         }

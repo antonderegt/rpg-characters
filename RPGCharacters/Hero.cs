@@ -16,9 +16,9 @@ namespace RPGCharacters
         {
             Name = name;
             Level = 1;
-            BasePrimaryAttributes = new PrimaryAttributes(strength, dexterity, intelligence, vitality);
-            TotalPrimaryAttributes = new PrimaryAttributes(strength, dexterity, intelligence, vitality);
-            BaseSecondaryAttributes = new SecondaryAttributes(vitality * 10, strength + vitality, intelligence); 
+            BasePrimaryAttributes = new PrimaryAttributes() { Strength = strength, Dexterity = dexterity, Intelligence = intelligence, Vitality = vitality };
+            TotalPrimaryAttributes = new PrimaryAttributes() { Strength = strength, Dexterity = dexterity, Intelligence = intelligence, Vitality = vitality };
+            BaseSecondaryAttributes = new SecondaryAttributes() { Health = vitality * 10, ArmorRating = strength + vitality, ElementalResistence = intelligence };
         }
 
         public abstract void LevelUp(int levels);
