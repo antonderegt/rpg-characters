@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RPGCharacters
 {
@@ -24,7 +21,7 @@ namespace RPGCharacters
             BaseSecondaryAttributes = new SecondaryAttributes(vitality * 10, strength + vitality, intelligence); 
         }
 
-        public abstract void LevelUp();
+        public abstract void LevelUp(int levels);
 
         public void displayStats()
         {
@@ -34,6 +31,7 @@ namespace RPGCharacters
             stats.AppendFormat("Level: {0}\n", Level);
             stats.AppendFormat("Strength: {0}\n", TotalPrimaryAttributes.Strength);
             stats.AppendFormat("Dexterity: {0}\n", TotalPrimaryAttributes.Dexterity);
+            stats.AppendFormat("Vitality: {0}\n", TotalPrimaryAttributes.Vitality);
             stats.AppendFormat("Intelligence: {0}\n", TotalPrimaryAttributes.Intelligence);
             stats.AppendFormat("Health: {0}\n", BaseSecondaryAttributes.Health);
             stats.AppendFormat("Armor Rating: {0}\n", BaseSecondaryAttributes.ArmorRating);

@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPGCharacters
 {
     class Mage : Hero
     {
-        public Mage(string name) : base(name, 5, 1, 1, 1)
+        public Mage(string name) : base(name, 5, 1, 1, 8)
         {
             Console.WriteLine("Created mage");
         }
 
-        public override void LevelUp()
+        public override void LevelUp(int levels)
         {
-            Level++;
-            //BaseVitality += 3;
-            //BaseStrength += 1;
-            //BaseDexterity += 1;
-            //BaseIntelligence += 5;
+            int newVitality = BasePrimaryAttributes.Vitality + (3 * levels);
+            int newStrength = BasePrimaryAttributes.Strength + (1 * levels);
+            int newDexterity = BasePrimaryAttributes.Dexterity + (1 * levels);
+            int newIntelligence = BasePrimaryAttributes.Intelligence + (8 * levels);
 
-            // Compute total attributes
+            this.BasePrimaryAttributes = new PrimaryAttributes(newStrength, newDexterity, newIntelligence, newVitality);
+
+            Level += 1 * levels;
         }
     }
 }

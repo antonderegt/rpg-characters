@@ -9,6 +9,10 @@ namespace RPGCharacters
             Mage mage = new Mage("Anton");
 
             mage.displayStats();
+
+            mage.LevelUp(1);
+
+            mage.displayStats();
         }
     }
 }
