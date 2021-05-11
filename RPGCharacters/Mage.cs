@@ -4,24 +4,37 @@ namespace RPGCharacters
 {
     class Mage : Hero
     {
+        /// <summary>
+        /// Initialize character
+        /// </summary>
+        /// <param name="name"></param>
         public Mage(string name) : base(name, 5, 1, 8, 1)
         {
-            Console.WriteLine("Created mage");
+            Console.WriteLine("Created a mage");
         }
 
+        /// <summary>
+        /// Levels up a character.
+        /// Each character levels up differently
+        /// </summary>
+        /// <param name="levels"></param>
         public override void LevelUp(int levels)
         {
             if (levels < 1) throw new ArgumentException();
 
-            PrimaryAttributes levelValues = new() { Vitality = 3 * levels, Strength = 1 * levels, Dexterity = 1 * levels, Intelligence = 5 * levels };
+            PrimaryAttributes levelUpValues = new() { Vitality = 3 * levels, Strength = 1 * levels, Dexterity = 1 * levels, Intelligence = 5 * levels };
 
-            BasePrimaryAttributes += levelValues;
+            BasePrimaryAttributes += levelUpValues;
 
             Level += 1 * levels;
 
             CalculateTotalStats();
         }
 
+        /// <summary>
+        /// Calculates damage per second
+        /// </summary>
+        /// <returns>Character damage per second</returns>
         public override double CalculateDPS()
         {
             double weaponDPS = CalculateWeaponDPS();
@@ -49,7 +62,7 @@ namespace RPGCharacters
 
             if (weapon.WeaponType != WeaponType.WEAPON_STAFF && weapon.WeaponType != WeaponType.WEAPON_WAND)
             {
-                throw new InvalidWeaponException($"A mage can't equip a {weapon.WeaponType}");
+                throw new InvalidWeaponException($"Character can't equip a {weapon.WeaponType}");
             }
 
             Equipment.Add(weapon.ItemSlot, weapon);
@@ -71,7 +84,7 @@ namespace RPGCharacters
 
             if (armor.ArmorType != ArmorType.ARMOR_CLOTH)
             {
-                throw new InvalidArmorException($"A mage can't equip a {armor.ArmorType}");
+                throw new InvalidArmorException($"Character can't equip a {armor.ArmorType}");
             }
 
             Equipment.Add(armor.ItemSlot, armor);
