@@ -41,6 +41,12 @@ namespace RPGCharacters
         public abstract void LevelUp(int levels);
 
         /// <summary>
+        /// Calculates a characters damage per seconde.
+        /// </summary>
+        /// <returns></returns>
+        public abstract double CalculateDPS();
+
+        /// <summary>
         /// Is used to equip a weapon.
         /// </summary>
         /// <param name="weapon"></param>
@@ -51,7 +57,6 @@ namespace RPGCharacters
         /// </summary>
         /// <param name="armor"></param>
         public abstract void Equip(Armor armor);
-
 
         /// <summary>
         /// Outputs all stats of a character to the console
@@ -129,22 +134,7 @@ namespace RPGCharacters
             };
         }
 
-        /// <summary>
-        /// Calculates a characters damage per seconde.
-        /// </summary>
-        /// <returns></returns>
-        public virtual double CalculateDPS()
-        {
-            double weaponDPS = CalculateWeaponDPS();
-            if (weaponDPS == 1)
-            {
-                return 1;
-            }
-
-            double multiplier = 1 + TotalPrimaryAttributes.Strength / 100.0;
-
-            return weaponDPS * multiplier;
-        }
+        
 
         /// <summary>
         /// Calculates a weapons damage per seconde.
