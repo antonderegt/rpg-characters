@@ -134,8 +134,6 @@ namespace RPGCharacters
             };
         }
 
-        
-
         /// <summary>
         /// Calculates a weapons damage per seconde.
         /// </summary>
