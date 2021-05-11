@@ -4,6 +4,9 @@ using System.Text;
 
 namespace RPGCharacters
 {
+    /// <summary>
+    /// The parent class of all the characters.
+    /// </summary>
     abstract class Hero
     {
         public string Name { get; set; }
@@ -14,13 +17,20 @@ namespace RPGCharacters
         public Dictionary<Slot, Item> Equipment { get; set; }
         public double DPS { get; set; }
 
+        /// <summary>
+        /// Initializes a characters.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="strength"></param>
+        /// <param name="dexterity"></param>
+        /// <param name="intelligence"></param>
+        /// <param name="vitality"></param>
         public Hero(string name, int strength, int dexterity, int intelligence, int vitality)
         {
             Name = name;
             Level = 1;
             Equipment = new Dictionary<Slot, Item>();
             BasePrimaryAttributes = new PrimaryAttributes() { Strength = strength, Dexterity = dexterity, Intelligence = intelligence, Vitality = vitality };
-            //TotalPrimaryAttributes = new PrimaryAttributes() { Strength = strength, Dexterity = dexterity, Intelligence = intelligence, Vitality = vitality };
             CalculateTotalStats();
             BaseSecondaryAttributes = new SecondaryAttributes()
             {
@@ -39,7 +49,7 @@ namespace RPGCharacters
         public abstract void LevelUp(int levels);
 
         /// <summary>
-        /// Used to equip a weapon
+        /// Is used to equip a weapon.
         /// </summary>
         /// <param name="weapon"></param>
         public void Equip(Weapon weapon)
@@ -52,6 +62,10 @@ namespace RPGCharacters
             Equipment.Add(weapon.ItemSlot, weapon);
         }
 
+        /// <summary>
+        /// Is used to equip a weapon.
+        /// </summary>
+        /// <param name="armor"></param>
         public void Equip(Armor armor)
         {
             if (armor.ItemLevel > Level)
@@ -62,6 +76,9 @@ namespace RPGCharacters
             Equipment.Add(armor.ItemSlot, armor);
         }
 
+        /// <summary>
+        /// Outputs all stats of a character to the console
+        /// </summary>
         public void DisplayStats()
         {
             CalculateTotalStats();
@@ -82,6 +99,9 @@ namespace RPGCharacters
             Console.WriteLine(stats.ToString());
         }
 
+        /// <summary>
+        /// Calculates total stats based on base stats and equipped items.
+        /// </summary>
         private void CalculateTotalStats()
         {
             int totalVitality = BasePrimaryAttributes.Vitality;
@@ -94,6 +114,10 @@ namespace RPGCharacters
             DPS = CalculateDPS();
         }
 
+        /// <summary>
+        /// Calculates a characters damage per seconde.
+        /// </summary>
+        /// <returns></returns>
         public virtual double CalculateDPS()
         {
             double weaponDPS = CalculateWeaponDPS();
@@ -107,6 +131,10 @@ namespace RPGCharacters
             return weaponDPS * multiplier;
         }
 
+        /// <summary>
+        /// Calculates a weapons damage per seconde.
+        /// </summary>
+        /// <returns></returns>
         public double CalculateWeaponDPS()
         {
             Item equippedWeapon;
