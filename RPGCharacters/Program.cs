@@ -8,9 +8,7 @@ namespace RPGCharacters
         {
             Mage mage = new Mage("Anton");
 
-            mage.DisplayStats();
-
-            mage.LevelUp(1);
+            mage.LevelUp(5);
 
             mage.DisplayStats();
 
@@ -29,7 +27,7 @@ namespace RPGCharacters
                 ItemLevel = 1,
                 ItemSlot = Slot.SLOT_BODY,
                 ArmorType = ArmorType.ARMOR_CLOTH,
-                Attributes = new PrimaryAttributes() { Vitality = 2, Strength = 1 }
+                Attributes = new PrimaryAttributes() { Vitality = 10, Strength = 20 }
             };
 
             mage.Equip(wand);
