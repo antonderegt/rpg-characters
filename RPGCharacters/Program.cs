@@ -14,16 +14,26 @@ namespace RPGCharacters
 
             mage.DisplayStats();
 
-            Weapon axe = new Weapon()
+            Weapon wand = new Weapon()
             {
-                ItemName = "Common axe",
-                ItemLevel = 1,
+                ItemName = "Common wand",
+                ItemLevel = 2,
                 ItemSlot = Slot.SLOT_WEAPON,
-                WeaponType = WeaponType.WEAPON_AXE,
-                WeaponAttributes = new WeaponAttributes() { Damage = 7, AttackSpeed = 1.1 }
+                WeaponType = WeaponType.WEAPON_WAND,
+                WeaponAttributes = new WeaponAttributes() { Damage = 17, AttackSpeed = 0.7 }
             };
 
-            mage.Equip(axe);
+            Armor cloth = new Armor()
+            {
+                ItemName = "Common cloth body armor",
+                ItemLevel = 1,
+                ItemSlot = Slot.SLOT_BODY,
+                ArmorType = ArmorType.ARMOR_CLOTH,
+                Attributes = new PrimaryAttributes() { Vitality = 2, Strength = 1 }
+            };
+
+            mage.Equip(wand);
+            mage.Equip(cloth);
 
             mage.DisplayStats();
         }

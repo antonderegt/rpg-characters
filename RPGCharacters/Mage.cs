@@ -46,12 +46,12 @@ namespace RPGCharacters
                 throw new InvalidWeaponException("Player needs to be level " + weapon.ItemLevel + " to equip this item");
             }
 
-            if (weapon.WeaponType.Equals(WeaponType.WEAPON_STAFF) || weapon.WeaponType.Equals(WeaponType.WEAPON_WAND))
+            if (weapon.WeaponType != WeaponType.WEAPON_STAFF && weapon.WeaponType != WeaponType.WEAPON_WAND)
             {
-                Equipment.Add(weapon.ItemSlot, weapon);
+                throw new InvalidWeaponException("A mage can't equip a " + weapon.WeaponType);
             }
 
-            throw new InvalidWeaponException("A mage can't equip a " + weapon.WeaponType);
+            Equipment.Add(weapon.ItemSlot, weapon);
         }
 
         /// <summary>
@@ -66,12 +66,12 @@ namespace RPGCharacters
                 throw new InvalidArmorException("Player needs to be level " + armor.ItemLevel + " to equip this item");
             }
 
-            if(armor.ArmorType.Equals(ArmorType.ARMOR_CLOTH))
+            if (armor.ArmorType != ArmorType.ARMOR_CLOTH)
             {
-                Equipment.Add(armor.ItemSlot, armor);
+                throw new InvalidArmorException("A mage can't equip a " + armor.ArmorType);
             }
 
-            throw new InvalidArmorException("A mage can't equip a " + armor.ArmorType);
+            Equipment.Add(armor.ItemSlot, armor);
         }
     }
 }
