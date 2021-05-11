@@ -38,8 +38,6 @@ namespace RPGCharacters
                 ArmorRating = TotalPrimaryAttributes.Strength + vitality,
                 ElementalResistence = TotalPrimaryAttributes.Intelligence
             };
-
-
         }
 
         /// <summary>
@@ -52,29 +50,14 @@ namespace RPGCharacters
         /// Is used to equip a weapon.
         /// </summary>
         /// <param name="weapon"></param>
-        public void Equip(Weapon weapon)
-        {
-            if (weapon.ItemLevel > Level)
-            {
-                throw new InvalidWeaponException("Player needs to be level " + weapon.ItemLevel + " to equip this item");
-            }
-
-            Equipment.Add(weapon.ItemSlot, weapon);
-        }
+        public abstract void Equip(Weapon weapon);
 
         /// <summary>
         /// Is used to equip a weapon.
         /// </summary>
         /// <param name="armor"></param>
-        public void Equip(Armor armor)
-        {
-            if (armor.ItemLevel > Level)
-            {
-                throw new InvalidArmorException("Player needs to be level " + armor.ItemLevel + " to equip this item");
-            }
-
-            Equipment.Add(armor.ItemSlot, armor);
-        }
+        public abstract void Equip(Armor armor);
+        
 
         /// <summary>
         /// Outputs all stats of a character to the console
