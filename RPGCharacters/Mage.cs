@@ -11,14 +11,15 @@ namespace RPGCharacters
 
         public override void LevelUp(int levels)
         {
-            int newVitality = BasePrimaryAttributes.Vitality + (3 * levels);
-            int newStrength = BasePrimaryAttributes.Strength + (1 * levels);
-            int newDexterity = BasePrimaryAttributes.Dexterity + (1 * levels);
-            int newIntelligence = BasePrimaryAttributes.Intelligence + (5 * levels);
+            if (levels < 1) throw new ArgumentException();
 
-            BasePrimaryAttributes = new PrimaryAttributes() { Strength = newStrength, Dexterity = newDexterity, Intelligence = newIntelligence, Vitality = newVitality };
+            PrimaryAttributes levelValues = new() { Vitality = 3 * levels, Strength = 1 * levels, Dexterity = 1 * levels, Intelligence = 5 * levels };
+
+            BasePrimaryAttributes += levelValues;
 
             Level += 1 * levels;
+
+            CalculateTotalStats();
         }
 
         public override double CalculateDPS()
@@ -43,15 +44,17 @@ namespace RPGCharacters
         {
             if (weapon.ItemLevel > Level)
             {
-                throw new InvalidWeaponException("Player needs to be level " + weapon.ItemLevel + " to equip this item");
+                throw new InvalidWeaponException($"Character needs to be level {weapon.ItemLevel} to equip this item");
             }
 
             if (weapon.WeaponType != WeaponType.WEAPON_STAFF && weapon.WeaponType != WeaponType.WEAPON_WAND)
             {
-                throw new InvalidWeaponException("A mage can't equip a " + weapon.WeaponType);
+                throw new InvalidWeaponException($"A mage can't equip a {weapon.WeaponType}");
             }
 
             Equipment.Add(weapon.ItemSlot, weapon);
+
+            Console.WriteLine("New weapon equipped!");
         }
 
         /// <summary>
@@ -63,15 +66,17 @@ namespace RPGCharacters
         {
             if (armor.ItemLevel > Level)
             {
-                throw new InvalidArmorException("Player needs to be level " + armor.ItemLevel + " to equip this item");
+                throw new InvalidArmorException($"Character needs to be level {armor.ItemLevel} to equip this item");
             }
 
             if (armor.ArmorType != ArmorType.ARMOR_CLOTH)
             {
-                throw new InvalidArmorException("A mage can't equip a " + armor.ArmorType);
+                throw new InvalidArmorException($"A mage can't equip a {armor.ArmorType}");
             }
 
             Equipment.Add(armor.ItemSlot, armor);
+
+            Console.WriteLine("New armor equipped!");
         }
     }
 }
