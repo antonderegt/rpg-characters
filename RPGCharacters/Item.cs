@@ -7,7 +7,7 @@
         SLOT_LEGS,
         SLOT_WEAPON
     }
-    class Item
+    abstract class Item
     {
         public string ItemName { get; set; }
         public int ItemLevel { get; set; }
