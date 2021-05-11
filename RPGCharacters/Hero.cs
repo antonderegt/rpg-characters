@@ -32,12 +32,6 @@ namespace RPGCharacters
             Equipment = new Dictionary<Slot, Item>();
             BasePrimaryAttributes = new PrimaryAttributes() { Strength = strength, Dexterity = dexterity, Intelligence = intelligence, Vitality = vitality };
             CalculateTotalStats();
-            BaseSecondaryAttributes = new SecondaryAttributes()
-            {
-                Health = TotalPrimaryAttributes.Vitality * 10,
-                ArmorRating = TotalPrimaryAttributes.Strength + vitality,
-                ElementalResistence = TotalPrimaryAttributes.Intelligence
-            };
         }
 
         /// <summary>
@@ -57,7 +51,7 @@ namespace RPGCharacters
         /// </summary>
         /// <param name="armor"></param>
         public abstract void Equip(Armor armor);
-        
+
 
         /// <summary>
         /// Outputs all stats of a character to the console
@@ -68,16 +62,16 @@ namespace RPGCharacters
 
             StringBuilder stats = new StringBuilder("\n-- Stats --\n");
 
-            stats.AppendFormat("Name: {0}\n", Name);
-            stats.AppendFormat("Level: {0}\n", Level);
-            stats.AppendFormat("Strength: {0}\n", TotalPrimaryAttributes.Strength);
-            stats.AppendFormat("Dexterity: {0}\n", TotalPrimaryAttributes.Dexterity);
-            stats.AppendFormat("Vitality: {0}\n", TotalPrimaryAttributes.Vitality);
-            stats.AppendFormat("Intelligence: {0}\n", TotalPrimaryAttributes.Intelligence);
-            stats.AppendFormat("Health: {0}\n", BaseSecondaryAttributes.Health);
-            stats.AppendFormat("Armor Rating: {0}\n", BaseSecondaryAttributes.ArmorRating);
-            stats.AppendFormat("Elemental Resistance: {0}\n", BaseSecondaryAttributes.ElementalResistence);
-            stats.AppendFormat("DPS: {0}\n", DPS.ToString("0.##"));
+            stats.AppendFormat($"Name: {Name}\n");
+            stats.AppendFormat($"Level: {Level}\n");
+            stats.AppendFormat($"Strength: {TotalPrimaryAttributes.Strength}\n");
+            stats.AppendFormat($"Dexterity: {TotalPrimaryAttributes.Dexterity}\n");
+            stats.AppendFormat($"Vitality: {TotalPrimaryAttributes.Vitality}\n");
+            stats.AppendFormat($"Intelligence: {TotalPrimaryAttributes.Intelligence}\n");
+            stats.AppendFormat($"Health: {BaseSecondaryAttributes.Health}\n");
+            stats.AppendFormat($"Armor Rating: {BaseSecondaryAttributes.ArmorRating}\n");
+            stats.AppendFormat($"Elemental Resistance: {BaseSecondaryAttributes.ElementalResistence}\n");
+            stats.AppendFormat($"DPS: {DPS.ToString("0.##")}\n");
 
             Console.WriteLine(stats.ToString());
         }
@@ -85,16 +79,54 @@ namespace RPGCharacters
         /// <summary>
         /// Calculates total stats based on base stats and equipped items.
         /// </summary>
-        private void CalculateTotalStats()
+        public void CalculateTotalStats()
         {
-            int totalVitality = BasePrimaryAttributes.Vitality;
-            int totalStrength = BasePrimaryAttributes.Strength;
-            int totalDexterity = BasePrimaryAttributes.Dexterity;
-            int totalIntelligence = BasePrimaryAttributes.Intelligence;
-
-            TotalPrimaryAttributes = new PrimaryAttributes() { Strength = totalStrength, Dexterity = totalDexterity, Intelligence = totalIntelligence, Vitality = totalVitality };
-
+            TotalPrimaryAttributes = CalculateArmorBonus();
+            BaseSecondaryAttributes = CalculateSecondaryStats();
             DPS = CalculateDPS();
+        }
+
+        /// <summary>
+        /// Calculates armor bonus
+        /// </summary>
+        /// <returns>New PrimaryAttributes</returns>
+        public PrimaryAttributes CalculateArmorBonus()
+        {
+            PrimaryAttributes armorBonusValues = new() { Strength = 0, Dexterity = 0, Intelligence = 0, Vitality = 0 };
+
+            bool hasHeadArmor = Equipment.TryGetValue(Slot.SLOT_HEADER, out Item headArmor);
+            bool hasBodyArmor = Equipment.TryGetValue(Slot.SLOT_BODY, out Item bodyArmor);
+            bool hasLegsArmor = Equipment.TryGetValue(Slot.SLOT_LEGS, out Item legsArmor);
+
+            if (hasHeadArmor)
+            {
+                Armor a = (Armor)headArmor;
+                armorBonusValues += new PrimaryAttributes() { Strength = a.Attributes.Strength, Dexterity = a.Attributes.Dexterity, Intelligence = a.Attributes.Intelligence, Vitality = a.Attributes.Vitality };
+            }
+
+            if (hasBodyArmor)
+            {
+                Armor a = (Armor)bodyArmor;
+                armorBonusValues += new PrimaryAttributes() { Strength = a.Attributes.Strength, Dexterity = a.Attributes.Dexterity, Intelligence = a.Attributes.Intelligence, Vitality = a.Attributes.Vitality };
+            }
+
+            if (hasLegsArmor)
+            {
+                Armor a = (Armor)legsArmor;
+                armorBonusValues += new PrimaryAttributes() { Strength = a.Attributes.Strength, Dexterity = a.Attributes.Dexterity, Intelligence = a.Attributes.Intelligence, Vitality = a.Attributes.Vitality };
+            }
+
+            return BasePrimaryAttributes + armorBonusValues;
+        }
+
+        public SecondaryAttributes CalculateSecondaryStats()
+        {
+            return new SecondaryAttributes()
+            {
+                Health = TotalPrimaryAttributes.Vitality * 10,
+                ArmorRating = TotalPrimaryAttributes.Strength + TotalPrimaryAttributes.Vitality,
+                ElementalResistence = TotalPrimaryAttributes.Intelligence
+            };
         }
 
         /// <summary>
