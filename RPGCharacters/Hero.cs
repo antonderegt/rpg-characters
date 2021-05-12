@@ -50,13 +50,13 @@ namespace RPGCharacters
         /// Is used to equip a weapon.
         /// </summary>
         /// <param name="weapon"></param>
-        public abstract void Equip(Weapon weapon);
+        public abstract string Equip(Weapon weapon);
 
         /// <summary>
         /// Is used to equip a weapon.
         /// </summary>
         /// <param name="armor"></param>
-        public abstract void Equip(Armor armor);
+        public abstract string Equip(Armor armor);
 
         /// <summary>
         /// Outputs all stats of a character to the console
