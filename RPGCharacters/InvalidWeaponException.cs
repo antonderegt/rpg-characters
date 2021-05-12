@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGCharacters
 {
-    class InvalidWeaponException : Exception
+    public class InvalidWeaponException : Exception
     {
         public InvalidWeaponException()
         {

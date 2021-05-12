@@ -1,6 +1,6 @@
 ﻿namespace RPGCharacters
 {
-    class SecondaryAttributes
+    public class SecondaryAttributes
     {
         public int Health { get; set; }
         public int ArmorRating { get; set; }

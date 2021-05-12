@@ -7,7 +7,7 @@ namespace RPGCharacters
     /// <summary>
     /// The parent class of all the characters.
     /// </summary>
-    abstract class Hero
+    public abstract class Hero
     {
         public string Name { get; set; }
         public int Level { get; set; }

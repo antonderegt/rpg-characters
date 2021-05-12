@@ -6,7 +6,7 @@
         ARMOR_MAIL,
         ARMOR_PLATE
     }
-    class Armor : Item
+    public class Armor : Item
     {
         public ArmorType ArmorType { get; set; }
         public PrimaryAttributes Attributes { get; set; }

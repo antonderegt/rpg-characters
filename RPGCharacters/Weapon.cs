@@ -10,7 +10,7 @@
         WEAPON_SWORD,
         WEAPON_WAND
     }
-    class Weapon : Item
+    public class Weapon : Item
     {
         public WeaponType WeaponType { get; set; }
         public WeaponAttributes WeaponAttributes { get; set; }

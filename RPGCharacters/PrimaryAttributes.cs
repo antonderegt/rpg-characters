@@ -1,6 +1,6 @@
 ﻿namespace RPGCharacters
 {
-    class PrimaryAttributes
+    public class PrimaryAttributes
     {
         public int Strength { get; set; }
         public int Dexterity { get; set; }

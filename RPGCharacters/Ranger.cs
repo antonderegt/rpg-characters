@@ -2,7 +2,7 @@
 
 namespace RPGCharacters
 {
-    class Ranger : Hero
+    public class Ranger : Hero
     {
         /// <summary>
         /// Initialize character
