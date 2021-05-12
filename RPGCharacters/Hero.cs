@@ -129,7 +129,7 @@ namespace RPGCharacters
             return new SecondaryAttributes()
             {
                 Health = TotalPrimaryAttributes.Vitality * 10,
-                ArmorRating = TotalPrimaryAttributes.Strength + TotalPrimaryAttributes.Vitality,
+                ArmorRating = TotalPrimaryAttributes.Strength + TotalPrimaryAttributes.Dexterity,
                 ElementalResistence = TotalPrimaryAttributes.Intelligence
             };
         }
