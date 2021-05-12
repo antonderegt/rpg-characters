@@ -1,6 +1,6 @@
+using RPGCharacters;
 using System;
 using Xunit;
-using RPGCharacters;
 
 namespace RPGCharactersTests
 {
@@ -103,7 +103,7 @@ namespace RPGCharactersTests
             Assert.Equal(expected, actual);
         }
 
-        
+
 
         [Fact]
         public void LevelUp_LevelUpOfRanger_SetsCorrectPrimaryAttributes()
