@@ -2,9 +2,9 @@ using System;
 using Xunit;
 using RPGCharacters;
 
-namespace ApplicationTests
+namespace RPGCharactersTests
 {
-    public class RPGCreationTests
+    public class RPGCharacterCreationTests
     {
         [Fact]
         public void Init_InitOfCharacter_SetsCorrectLevel()
