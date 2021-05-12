@@ -1,11 +1,27 @@
-﻿namespace RPGCharacters
+﻿using System;
+
+namespace RPGCharacters
 {
-    public class PrimaryAttributes
+    public class PrimaryAttributes : IEquatable<PrimaryAttributes>
     {
         public int Strength { get; set; }
         public int Dexterity { get; set; }
         public int Intelligence { get; set; }
         public int Vitality { get; set; }
+
+        public bool Equals(PrimaryAttributes other)
+        {
+            if (Strength != other.Strength)
+                return false;
+            if (Dexterity != other.Dexterity)
+                return false;
+            if (Intelligence != other.Intelligence)
+                return false;
+            if (Vitality != other.Vitality)
+                return false;
+
+            return true;
+        }
 
         public static PrimaryAttributes operator+ (PrimaryAttributes a, PrimaryAttributes b)
         {
