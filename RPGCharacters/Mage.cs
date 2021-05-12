@@ -37,6 +37,7 @@ namespace RPGCharacters
         /// <returns>Character damage per second</returns>
         public override double CalculateDPS()
         {
+            TotalPrimaryAttributes = CalculateArmorBonus();
             double weaponDPS = CalculateWeaponDPS();
             if (weaponDPS == 1)
             {
@@ -53,7 +54,7 @@ namespace RPGCharacters
         /// </summary>
         /// <exception cref="InvalidWeaponException">Thrown when weapon level is higher than character level or when weapon is not of type WEAPON_STAFF or WEAPON_WAND</exception>
         /// <param name="weapon"></param>
-        public override void Equip(Weapon weapon)
+        public override string Equip(Weapon weapon)
         {
             if (weapon.ItemLevel > Level)
             {
@@ -67,7 +68,7 @@ namespace RPGCharacters
 
             Equipment.Add(weapon.ItemSlot, weapon);
 
-            Console.WriteLine("New weapon equipped!");
+            return "New weapon equipped!";
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace RPGCharacters
         /// </summary>
         /// <exception cref="InvalidWeaponException">Thrown when armor level is higher than character level or when armor is not of type ARMOR_CLOTH</exception>
         /// <param name="weapon"></param>
-        public override void Equip(Armor armor)
+        public override string Equip(Armor armor)
         {
             if (armor.ItemLevel > Level)
             {
@@ -89,7 +90,7 @@ namespace RPGCharacters
 
             Equipment.Add(armor.ItemSlot, armor);
 
-            Console.WriteLine("New armor equipped!");
+            return "New armor equipped!";
         }
     }
 }
