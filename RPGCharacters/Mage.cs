@@ -8,7 +8,7 @@ namespace RPGCharacters
         /// Initialize character
         /// </summary>
         /// <param name="name"></param>
-        public Mage(string name) : base(name, 5, 1, 8, 1)
+        public Mage(string name) : base(name, 1, 1, 8, 5)
         {
             Console.WriteLine("Created a mage");
         }
