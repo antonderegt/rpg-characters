@@ -8,7 +8,7 @@ namespace RPGCharactersTests
     public class RPGCharacterCreationTests
     {
         [Fact]
-        public void Init_InitOfCharacter_SetsCorrectLevel()
+        public void Constructor_InitOfCharacter_SetsCorrectLevel()
         {
             // Arrange
             Mage mage = new("Mage");
@@ -44,7 +44,7 @@ namespace RPGCharactersTests
         }
 
         [Fact]
-        public void Init_InitOfMage_SetsCorrectPrimaryAttributes()
+        public void Constructor_InitOfMage_SetsCorrectPrimaryAttributes()
         {
             // Arrange
             Mage mage = new("Mage");
@@ -56,7 +56,7 @@ namespace RPGCharactersTests
         }
 
         [Fact]
-        public void Init_InitOfRanger_SetsCorrectPrimaryAttributes()
+        public void Constructor_InitOfRanger_SetsCorrectPrimaryAttributes()
         {
             // Arrange
             Ranger ranger = new("Ranger");
@@ -68,7 +68,7 @@ namespace RPGCharactersTests
         }
 
         [Fact]
-        public void Init_InitOfRogue_SetsCorrectPrimaryAttributes()
+        public void Constructor_InitOfRogue_SetsCorrectPrimaryAttributes()
         {
             // Arrange
             Rogue rogue = new("Rogue");
@@ -80,7 +80,7 @@ namespace RPGCharactersTests
         }
 
         [Fact]
-        public void Init_InitOfWarrior_SetsCorrectPrimaryAttributes()
+        public void Constructor_InitOfWarrior_SetsCorrectPrimaryAttributes()
         {
             // Arrange
             Warrior warrior = new("Warrior");
