@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using RPGCharacters;
+using Xunit;
 using RPGCharacters.Custom_Exceptions;
 using RPGCharacters.Helpers;
 using RPGCharacters.Items;
