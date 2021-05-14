@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RPGCharacters.Helpers;
+using System;
 
 namespace RPGCharacters
 {

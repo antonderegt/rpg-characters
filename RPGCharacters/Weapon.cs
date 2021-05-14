@@ -1,4 +1,6 @@
-﻿namespace RPGCharacters
+﻿using RPGCharacters.Helpers;
+
+namespace RPGCharacters
 {
     public enum WeaponType
     {

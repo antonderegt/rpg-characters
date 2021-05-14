@@ -1,5 +1,6 @@
 ﻿using System;
 using RPGCharacters.Custom_Exceptions;
+using RPGCharacters.Helpers;
 
 namespace RPGCharacters
 {

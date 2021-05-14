@@ -1,4 +1,5 @@
 using RPGCharacters;
+using RPGCharacters.Helpers;
 using System;
 using Xunit;
 
