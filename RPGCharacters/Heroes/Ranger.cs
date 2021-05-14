@@ -1,18 +1,19 @@
 ﻿using System;
 using RPGCharacters.Custom_Exceptions;
 using RPGCharacters.Helpers;
+using RPGCharacters.Items;
 
-namespace RPGCharacters
+namespace RPGCharacters.Heroes
 {
-    public class Warrior : Hero
+    public class Ranger : Hero
     {
         /// <summary>
         /// Initialize character
         /// </summary>
         /// <param name="name"></param>
-        public Warrior(string name) : base(name, 5, 2, 1, 10)
+        public Ranger(string name) : base(name, 1, 7, 1, 8)
         {
-            Console.WriteLine("Created a warrior");
+            Console.WriteLine("Created a ranger");
         }
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace RPGCharacters
         {
             if (levels < 1) throw new ArgumentException();
 
-            PrimaryAttributes levelUpValues = new() { Vitality = 5 * levels, Strength = 3 * levels, Dexterity = 2 * levels, Intelligence = 1 * levels };
+            PrimaryAttributes levelUpValues = new() { Vitality = 2 * levels, Strength = 1 * levels, Dexterity = 5 * levels, Intelligence = 1 * levels };
 
             BasePrimaryAttributes += levelUpValues;
 
@@ -46,7 +47,7 @@ namespace RPGCharacters
                 return 1;
             }
 
-            double multiplier = 1 + TotalPrimaryAttributes.Strength / 100.0;
+            double multiplier = 1 + TotalPrimaryAttributes.Dexterity / 100.0;
 
             return weaponDPS * multiplier;
         }
@@ -63,7 +64,7 @@ namespace RPGCharacters
                 throw new InvalidWeaponException($"Character needs to be level {weapon.ItemLevel} to equip this item");
             }
 
-            if (weapon.WeaponType != WeaponType.WEAPON_AXE && weapon.WeaponType != WeaponType.WEAPON_HAMMER && weapon.WeaponType != WeaponType.WEAPON_SWORD)
+            if (weapon.WeaponType != WeaponType.WEAPON_BOW)
             {
                 throw new InvalidWeaponException($"Character can't equip a {weapon.WeaponType}");
             }
@@ -85,7 +86,7 @@ namespace RPGCharacters
                 throw new InvalidArmorException($"Character needs to be level {armor.ItemLevel} to equip this item");
             }
 
-            if (armor.ArmorType != ArmorType.ARMOR_PLATE && armor.ArmorType != ArmorType.ARMOR_MAIL)
+            if (armor.ArmorType != ArmorType.ARMOR_LEATHER && armor.ArmorType != ArmorType.ARMOR_MAIL)
             {
                 throw new InvalidArmorException($"Character can't equip a {armor.ArmorType}");
             }

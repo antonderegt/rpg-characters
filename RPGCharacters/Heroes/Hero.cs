@@ -1,9 +1,10 @@
 ﻿using RPGCharacters.Helpers;
+using RPGCharacters.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RPGCharacters
+namespace RPGCharacters.Heroes
 {
     /// <summary>
     /// The parent class of all the characters.

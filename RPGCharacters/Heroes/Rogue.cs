@@ -1,18 +1,19 @@
 ﻿using System;
 using RPGCharacters.Custom_Exceptions;
 using RPGCharacters.Helpers;
+using RPGCharacters.Items;
 
-namespace RPGCharacters
+namespace RPGCharacters.Heroes
 {
-    public class Ranger : Hero
+    public class Rogue : Hero
     {
         /// <summary>
         /// Initialize character
         /// </summary>
         /// <param name="name"></param>
-        public Ranger(string name) : base(name, 1, 7, 1, 8)
+        public Rogue(string name) : base(name, 2, 6, 1, 8)
         {
-            Console.WriteLine("Created a ranger");
+            Console.WriteLine("Created a rogue");
         }
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace RPGCharacters
         {
             if (levels < 1) throw new ArgumentException();
 
-            PrimaryAttributes levelUpValues = new() { Vitality = 2 * levels, Strength = 1 * levels, Dexterity = 5 * levels, Intelligence = 1 * levels };
+            PrimaryAttributes levelUpValues = new() { Vitality = 3 * levels, Strength = 1 * levels, Dexterity = 4 * levels, Intelligence = 1 * levels };
 
             BasePrimaryAttributes += levelUpValues;
 
@@ -63,7 +64,7 @@ namespace RPGCharacters
                 throw new InvalidWeaponException($"Character needs to be level {weapon.ItemLevel} to equip this item");
             }
 
-            if (weapon.WeaponType != WeaponType.WEAPON_BOW)
+            if (weapon.WeaponType != WeaponType.WEAPON_DAGGER && weapon.WeaponType != WeaponType.WEAPON_SWORD)
             {
                 throw new InvalidWeaponException($"Character can't equip a {weapon.WeaponType}");
             }

@@ -1,8 +1,9 @@
 ﻿using System;
 using RPGCharacters.Custom_Exceptions;
 using RPGCharacters.Helpers;
+using RPGCharacters.Items;
 
-namespace RPGCharacters
+namespace RPGCharacters.Heroes
 {
     public class Mage : Hero
     {

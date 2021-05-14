@@ -1,4 +1,4 @@
-﻿namespace RPGCharacters
+﻿namespace RPGCharacters.Items
 {
     public enum Slot
     {

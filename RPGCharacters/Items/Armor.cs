@@ -1,6 +1,6 @@
 ﻿using RPGCharacters.Helpers;
 
-namespace RPGCharacters
+namespace RPGCharacters.Items
 {
     public enum ArmorType { 
         ARMOR_CLOTH,
