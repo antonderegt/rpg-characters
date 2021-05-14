@@ -1,4 +1,3 @@
-using RPGCharacters;
 using RPGCharacters.Helpers;
 using RPGCharacters.Heroes;
 using System;
@@ -8,7 +7,6 @@ namespace RPGCharactersTests
 {
     public class RPGCharacterCreationTests
     {
-
         #region Constructor
 
         [Fact]
