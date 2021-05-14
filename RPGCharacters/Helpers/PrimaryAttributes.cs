@@ -2,6 +2,9 @@
 
 namespace RPGCharacters.Helpers
 {
+    /// <summary>
+    /// Helper class to group primary attributes of a hero.
+    /// </summary>
     public class PrimaryAttributes
     {
         public int Strength { get; set; }
@@ -10,10 +13,10 @@ namespace RPGCharacters.Helpers
         public int Vitality { get; set; }
 
         /// <summary>
-        /// Checks if two PrimaryAttributes objects are equal
+        /// Checks if two PrimaryAttributes objects are equal.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns>True if equal, otherwise false</returns>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>Whether the objects are equal</returns>
         public override bool Equals(object obj)
         {
             return obj is PrimaryAttributes attributes &&
@@ -24,11 +27,11 @@ namespace RPGCharacters.Helpers
         }
 
         /// <summary>
-        /// Adds to Primary Attributes together
+        /// Adds two PrimaryAttributes together.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns>New PrimaryAttributes object of sum of inputs</returns>
+        /// <param name="a">Object one</param>
+        /// <param name="b">Object two</param>
+        /// <returns>New PrimaryAttributes object of sum of the inputs</returns>
         public static PrimaryAttributes operator +(PrimaryAttributes a, PrimaryAttributes b) => new()
         {
             Strength = a.Strength + b.Strength,

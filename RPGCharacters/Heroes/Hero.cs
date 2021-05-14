@@ -1,13 +1,13 @@
-﻿using RPGCharacters.Helpers;
+﻿using RPGCharacters.Custom_Exceptions;
+using RPGCharacters.Helpers;
 using RPGCharacters.Items;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RPGCharacters.Heroes
 {
     /// <summary>
-    /// The parent class of all the characters.
+    /// Abstract parent class of all the hero characters.
     /// </summary>
     public abstract class Hero
     {
@@ -20,13 +20,13 @@ namespace RPGCharacters.Heroes
         public double DPS { get; set; }
 
         /// <summary>
-        /// Initializes a characters.
+        /// Initializes a hero.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="strength"></param>
-        /// <param name="dexterity"></param>
-        /// <param name="intelligence"></param>
-        /// <param name="vitality"></param>
+        /// <param name="name">Name of hero</param>
+        /// <param name="strength">Strength of hero</param>
+        /// <param name="dexterity">Dexterity of hero</param>
+        /// <param name="intelligence">Intelligence of hero</param>
+        /// <param name="vitality">Vitality of hero</param>
         public Hero(string name, int strength, int dexterity, int intelligence, int vitality)
         {
             Name = name;
@@ -37,50 +37,43 @@ namespace RPGCharacters.Heroes
         }
 
         /// <summary>
-        /// Each character type has it's own way of leveling up
+        /// Levels up a hero and recalculates total stats.
         /// </summary>
-        /// <param name="levels"></param>
+        /// <param name="levels">Number of levels to level up</param>
+        /// <exception cref="ArgumentException">Levels is lower than 1</exception>
         public abstract void LevelUp(int levels);
 
         /// <summary>
-        /// Calculates a characters damage per seconde.
+        /// Calculates a heros damage per seconde.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Damage per second</returns>
         public abstract double CalculateDPS();
 
         /// <summary>
-        /// Is used to equip a weapon.
+        /// Equips a weapon.
         /// </summary>
-        /// <param name="weapon"></param>
+        /// <param name="weapon">Weapon object</param>
+        /// <exception cref="InvalidWeaponException">Thrown when weapon level is higher than character level or when weapon is not of type WEAPON_STAFF or WEAPON_WAND</exception>
+        /// <returns>Success message</returns>
         public abstract string Equip(Weapon weapon);
 
         /// <summary>
-        /// Is used to equip a weapon.
+        /// Equips armor.
         /// </summary>
-        /// <param name="armor"></param>
+        /// <param name="armor">Armor object</param>
+        /// <exception cref="InvalidArmorException">Thrown when armor level is higher than character level or when armor is not of type ARMOR_CLOTH</exception>
+        /// <returns>Success message</returns>
         public abstract string Equip(Armor armor);
 
         /// <summary>
-        /// Outputs all stats of a character to the console
+        /// Calculates and outputs hero stats.
         /// </summary>
         public void DisplayStats()
         {
             CalculateTotalStats();
 
-            StringBuilder stats = new StringBuilder("\n-- Stats --\n");
-
-            stats.AppendFormat($"Name: {Name}\n");
-            stats.AppendFormat($"Level: {Level}\n");
-            stats.AppendFormat($"Strength: {TotalPrimaryAttributes.Strength}\n");
-            stats.AppendFormat($"Dexterity: {TotalPrimaryAttributes.Dexterity}\n");
-            stats.AppendFormat($"Vitality: {TotalPrimaryAttributes.Vitality}\n");
-            stats.AppendFormat($"Intelligence: {TotalPrimaryAttributes.Intelligence}\n");
-            stats.AppendFormat($"Health: {BaseSecondaryAttributes.Health}\n");
-            stats.AppendFormat($"Armor Rating: {BaseSecondaryAttributes.ArmorRating}\n");
-            stats.AppendFormat($"Elemental Resistance: {BaseSecondaryAttributes.ElementalResistence}\n");
-            stats.AppendFormat($"DPS: {DPS.ToString("0.##")}\n");
-
-            Console.WriteLine(stats.ToString());
+            HeroWriter writer = new();
+            writer.WriteStatsToConsole(Name, Level, TotalPrimaryAttributes, BaseSecondaryAttributes, DPS);
         }
 
         /// <summary>

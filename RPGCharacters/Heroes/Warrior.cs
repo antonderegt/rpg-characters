@@ -5,22 +5,21 @@ using RPGCharacters.Items;
 
 namespace RPGCharacters.Heroes
 {
+    /// <summary>
+    /// Hero of type warrior.
+    /// </summary>
     public class Warrior : Hero
     {
         /// <summary>
-        /// Initialize character
+        /// Initialize a warrior.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Hero's name</param>
         public Warrior(string name) : base(name, 5, 2, 1, 10)
         {
             Console.WriteLine("Created a warrior");
         }
 
-        /// <summary>
-        /// Levels up a character.
-        /// Each character levels up differently
-        /// </summary>
-        /// <param name="levels"></param>
+        /// <inheritdoc/>
         public override void LevelUp(int levels)
         {
             if (levels < 1) throw new ArgumentException();
@@ -34,10 +33,7 @@ namespace RPGCharacters.Heroes
             CalculateTotalStats();
         }
 
-        /// <summary>
-        /// Calculates damage per second
-        /// </summary>
-        /// <returns>Character damage per second</returns>
+        /// <inheritdoc/>
         public override double CalculateDPS()
         {
             TotalPrimaryAttributes = CalculateArmorBonus();
@@ -52,11 +48,7 @@ namespace RPGCharacters.Heroes
             return weaponDPS * multiplier;
         }
 
-        /// <summary>
-        /// Equips a weapon.
-        /// </summary>
-        /// <exception cref="InvalidWeaponException">Thrown when weapon level is higher than character level or when weapon is not of type WEAPON_STAFF or WEAPON_WAND</exception>
-        /// <param name="weapon"></param>
+        /// <inheritdoc/>
         public override string Equip(Weapon weapon)
         {
             if (weapon.ItemLevel > Level)
@@ -74,11 +66,7 @@ namespace RPGCharacters.Heroes
             return "New weapon equipped!";
         }
 
-        /// <summary>
-        /// Equips armor.
-        /// </summary>
-        /// <exception cref="InvalidWeaponException">Thrown when armor level is higher than character level or when armor is not of type ARMOR_CLOTH</exception>
-        /// <param name="weapon"></param>
+        /// <inheritdoc/>
         public override string Equip(Armor armor)
         {
             if (armor.ItemLevel > Level)

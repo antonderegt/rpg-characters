@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPGCharacters.Custom_Exceptions
 {
+    /// <summary>
+    /// Invalid armor exception.
+    /// </summary>
     public class InvalidArmorException : Exception
     {
         public InvalidArmorException()

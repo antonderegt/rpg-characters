@@ -5,6 +5,9 @@ using Xunit;
 
 namespace RPGCharactersTests
 {
+    /// <summary>
+    /// Tests RPG Character creation and leveling.
+    /// </summary>
     public class RPGCharacterCreationTests
     {
         #region Constructor
@@ -20,8 +23,6 @@ namespace RPGCharactersTests
             // Assert
             Assert.Equal(expected, actual);
         }
-
-        
 
         [Fact]
         public void Constructor_InitOfMage_SetsCorrectPrimaryAttributes()

@@ -1,5 +1,8 @@
 ﻿namespace RPGCharacters.Items
 {
+    /// <summary>
+    /// Lists all available slots where items can be equipped.
+    /// </summary>
     public enum Slot
     {
         SLOT_HEADER,
@@ -7,6 +10,10 @@
         SLOT_LEGS,
         SLOT_WEAPON
     }
+
+    /// <summary>
+    /// Defines the base of an item.
+    /// </summary>
     public abstract class Item
     {
         public string ItemName { get; set; }

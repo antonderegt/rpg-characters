@@ -2,6 +2,9 @@
 
 namespace RPGCharacters.Items
 {
+    /// <summary>
+    /// Lists all available weapons.
+    /// </summary>
     public enum WeaponType
     {
         WEAPON_AXE,
@@ -12,6 +15,10 @@ namespace RPGCharacters.Items
         WEAPON_SWORD,
         WEAPON_WAND
     }
+
+    /// <summary>
+    /// Defines structure of an item of type weapon.
+    /// </summary>
     public class Weapon : Item
     {
         public WeaponType WeaponType { get; set; }

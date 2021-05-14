@@ -6,6 +6,9 @@ using RPGCharacters.Heroes;
 
 namespace RPGCharactersTests
 {
+    /// <summary>
+    /// Test RPG Character items, equipping and DPS calculations.
+    /// </summary>
     public class RPGCharacterEquipmentTests
     {
         #region TestItems
