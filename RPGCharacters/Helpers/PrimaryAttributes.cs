@@ -9,6 +9,11 @@ namespace RPGCharacters.Helpers
         public int Intelligence { get; set; }
         public int Vitality { get; set; }
 
+        /// <summary>
+        /// Checks if two PrimaryAttributes objects are equal
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>True if equal, otherwise false</returns>
         public override bool Equals(object obj)
         {
             return obj is PrimaryAttributes attributes &&
@@ -18,6 +23,12 @@ namespace RPGCharacters.Helpers
                    Vitality == attributes.Vitality;
         }
 
+        /// <summary>
+        /// Adds to Primary Attributes together
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>New PrimaryAttributes object of sum of inputs</returns>
         public static PrimaryAttributes operator +(PrimaryAttributes a, PrimaryAttributes b) => new()
         {
             Strength = a.Strength + b.Strength,
