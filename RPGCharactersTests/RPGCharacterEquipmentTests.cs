@@ -1,5 +1,6 @@
 ﻿using RPGCharacters;
 using Xunit;
+using RPGCharacters.Custom_Exceptions;
 
 namespace RPGCharactersTests
 {
