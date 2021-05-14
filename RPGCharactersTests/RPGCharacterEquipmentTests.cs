@@ -2,12 +2,14 @@
 using Xunit;
 using RPGCharacters.Custom_Exceptions;
 using RPGCharacters.Helpers;
+using RPGCharacters.Items;
+using RPGCharacters.Heroes;
 
 namespace RPGCharactersTests
 {
     public class RPGCharacterEquipmentTests
     {
-
+        #region TestItems
         Weapon testAxe = new Weapon()
         {
             ItemName = "Common axe",
@@ -43,6 +45,10 @@ namespace RPGCharactersTests
             ArmorType = ArmorType.ARMOR_CLOTH,
             Attributes = new PrimaryAttributes() { Vitality = 1, Intelligence = 5 }
         };
+
+        #endregion
+
+        #region Equip
 
         [Fact]
         public void Equip_CharacterTriesToEquipHighLevelWeapon_ThrowsInvalidWeaponException()
@@ -106,6 +112,10 @@ namespace RPGCharactersTests
             Assert.Equal(expected, actual);
         }
 
+        #endregion
+
+        #region CalculateDPS
+
         [Fact]
         public void CalculateDPS_CalculateDPSOfWarriorOfLevelOne_ReturnsDPS()
         {
@@ -144,5 +154,7 @@ namespace RPGCharactersTests
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        #endregion
     }
 }

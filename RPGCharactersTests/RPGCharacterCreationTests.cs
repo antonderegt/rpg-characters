@@ -1,5 +1,6 @@
 using RPGCharacters;
 using RPGCharacters.Helpers;
+using RPGCharacters.Heroes;
 using System;
 using Xunit;
 
@@ -7,6 +8,9 @@ namespace RPGCharactersTests
 {
     public class RPGCharacterCreationTests
     {
+
+        #region Constructor
+
         [Fact]
         public void Constructor_InitOfCharacter_SetsCorrectLevel()
         {
@@ -19,29 +23,7 @@ namespace RPGCharactersTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void LevelUp_CharacterLevelsUp_SetsLevel()
-        {
-            // Arrange
-            Warrior warrior = new("Warrior");
-            int expected = 2;
-            // Act
-            warrior.LevelUp(1);
-            int actual = warrior.Level;
-            // Assert
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData(0)]
-        [InlineData(-1)]
-        public void LevelUp_GainWrongNumberOfLevels_ThrowsArgumentException(int levels)
-        {
-            // Arrange
-            Rogue rogue = new("Rogue");
-            // Act and Assert
-            Assert.Throws<ArgumentException>(() => rogue.LevelUp(levels));
-        }
+        
 
         [Fact]
         public void Constructor_InitOfMage_SetsCorrectPrimaryAttributes()
@@ -91,6 +73,34 @@ namespace RPGCharactersTests
             Assert.Equal(expected, actual);
         }
 
+        #endregion
+
+        #region LevelUp
+
+        [Fact]
+        public void LevelUp_CharacterLevelsUp_SetsLevel()
+        {
+            // Arrange
+            Warrior warrior = new("Warrior");
+            int expected = 2;
+            // Act
+            warrior.LevelUp(1);
+            int actual = warrior.Level;
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void LevelUp_GainWrongNumberOfLevels_ThrowsArgumentException(int levels)
+        {
+            // Arrange
+            Rogue rogue = new("Rogue");
+            // Act and Assert
+            Assert.Throws<ArgumentException>(() => rogue.LevelUp(levels));
+        }
+
         [Fact]
         public void LevelUp_LevelUpOfMage_SetsCorrectPrimaryAttributes()
         {
@@ -103,8 +113,6 @@ namespace RPGCharactersTests
             //Assert
             Assert.Equal(expected, actual);
         }
-
-
 
         [Fact]
         public void LevelUp_LevelUpOfRanger_SetsCorrectPrimaryAttributes()
@@ -157,5 +165,7 @@ namespace RPGCharactersTests
             //Assert
             Assert.Equal(expected, actual);
         }
+
+        #endregion
     }
 }
