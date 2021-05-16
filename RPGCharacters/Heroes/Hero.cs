@@ -44,9 +44,9 @@ namespace RPGCharacters.Heroes
         public abstract void LevelUp(int levels);
 
         /// <summary>
-        /// Calculates a heros damage per seconde.
+        /// Calculates a heroes damage per seconde.
         /// </summary>
-        /// <returns>Damage per second</returns>
+        /// <returns>A double with damage per second</returns>
         public abstract double CalculateDPS();
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace RPGCharacters.Heroes
         /// </summary>
         /// <param name="weapon">Weapon object</param>
         /// <exception cref="InvalidWeaponException">Thrown when weapon level is higher than character level or when weapon is not of type WEAPON_STAFF or WEAPON_WAND</exception>
-        /// <returns>Success message</returns>
+        /// <returns>A string with a success message, or throws and exception</returns>
         public abstract string Equip(Weapon weapon);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace RPGCharacters.Heroes
         /// </summary>
         /// <param name="armor">Armor object</param>
         /// <exception cref="InvalidArmorException">Thrown when armor level is higher than character level or when armor is not of type ARMOR_CLOTH</exception>
-        /// <returns>Success message</returns>
+        /// <returns>A string with a success message, or throws and exception</returns>
         public abstract string Equip(Armor armor);
 
         /// <summary>
