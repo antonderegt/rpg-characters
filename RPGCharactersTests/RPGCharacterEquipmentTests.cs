@@ -116,6 +116,23 @@ namespace RPGCharactersTests
 
         #endregion
 
+        #region PrimaryAttributes
+
+        [Fact]
+        public void OperatorAddition_AddTwoPrimaryAttributes_ShouldReturnSumOfAttributes()
+        {
+            // Arrange
+            PrimaryAttributes lhs = new() { Vitality = 3, Strength = 1, Dexterity = 1, Intelligence = 5 };
+            PrimaryAttributes rhs = new() { Vitality = 7, Strength = 9, Dexterity = 9, Intelligence = 5 };
+            PrimaryAttributes expected = new() { Vitality = 10, Strength = 10, Dexterity = 10, Intelligence = 10 };
+            // Act
+            PrimaryAttributes actual = lhs + rhs;
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        #endregion
+
         #region CalculateDPS
 
         [Fact]
