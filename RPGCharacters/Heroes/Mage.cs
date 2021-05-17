@@ -16,7 +16,6 @@ namespace RPGCharacters.Heroes
         /// <param name="name">Hero's name</param>
         public Mage(string name) : base(name, 1, 1, 8, 5)
         {
-            Console.WriteLine("Created a mage");
         }
 
         /// <inheritdoc/>
@@ -61,7 +60,7 @@ namespace RPGCharacters.Heroes
                 throw new InvalidWeaponException($"Character can't equip a {weapon.WeaponType}");
             }
 
-            Equipment.Add(weapon.ItemSlot, weapon);
+            Equipment[weapon.ItemSlot] = weapon;
 
             return "New weapon equipped!";
         }
@@ -79,7 +78,7 @@ namespace RPGCharacters.Heroes
                 throw new InvalidArmorException($"Character can't equip a {armor.ArmorType}");
             }
 
-            Equipment.Add(armor.ItemSlot, armor);
+            Equipment[armor.ItemSlot] = armor;
 
             return "New armor equipped!";
         }
