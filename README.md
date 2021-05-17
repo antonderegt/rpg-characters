@@ -1,5 +1,10 @@
 # RPG Characters Generator
-A console application written in C#. 
+A console game written in C#. 
+
+## How to Play
+When you start the game you are greeted and asked what type of hero you want to play with. You can choose between a mage, ranger, rogue and warrior.
+The next step is to give your hero a name. Now it's time to start playing! You'll be asked if you want fight, see you stats or leave the game.
+If you choose to fight, a random opponent will be generated and you will fight that opponent. If you win, you'll be awarded a new weapon of a new piece of armor. If you loose, the game ends.
 
 ## Components
 Custom exceptions.
