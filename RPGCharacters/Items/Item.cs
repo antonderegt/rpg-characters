@@ -20,6 +20,10 @@
         public int ItemLevel { get; set; }
         public Slot ItemSlot { get; set; }
 
+        /// <summary>
+        /// Displays the type of item.
+        /// </summary>
+        /// <returns>String of item description</returns>
         public abstract string ItemDescription();
     }
 }

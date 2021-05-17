@@ -24,6 +24,7 @@ namespace RPGCharacters.Items
         public WeaponType WeaponType { get; set; }
         public WeaponAttributes WeaponAttributes { get; set; }
 
+        /// <inheritdoc/>
         public override string ItemDescription()
         {
             return $"Weapon of type {WeaponType}";

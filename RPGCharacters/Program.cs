@@ -7,6 +7,10 @@ namespace RPGCharacters
 {
     class Program
     {
+        /// <summary>
+        /// Handles the game loop to make the game playable.
+        /// </summary>
+        /// <param name="args">Not used</param>
         static void Main(string[] args)
         {
             Console.WriteLine("\nWelcome to the RPG Games");
@@ -68,6 +72,10 @@ namespace RPGCharacters
             }
         }
 
+        /// <summary>
+        /// Handles a fight between two Heroes. When the fight is lost, the game ends. When the fight is won, the player gets a random item and levels up.
+        /// </summary>
+        /// <param name="hero">The opponent</param>
         public static void Fight(Hero hero)
         {
             Hero opponent = CreateRandomOpponent(hero.Level);
@@ -118,9 +126,16 @@ namespace RPGCharacters
                 default:
                     break;
             }
+
             hero.LevelUp(1);
+            Console.WriteLine("\nYou leveled up!");
         }
 
+        /// <summary>
+        /// Creates a Hero of a random type with a random weapon.
+        /// </summary>
+        /// <param name="level">Level of the hero</param>
+        /// <returns>Random Hero</returns>
         public static Hero CreateRandomOpponent(int level)
         {
             var rand = new Random();
@@ -178,6 +193,10 @@ namespace RPGCharacters
             return opponent;
         }
 
+        /// <summary>
+        /// Creates a random item of type Armor or Weapon with random attribute values.
+        /// </summary>
+        /// <returns>Random Item of type Armor or Weapon</returns>
         public static Item CreateRandomItem()
         {
             var rand = new Random();
