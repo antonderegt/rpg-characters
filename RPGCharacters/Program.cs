@@ -15,61 +15,120 @@ namespace RPGCharacters
         {
             Console.WriteLine("\nWelcome to the RPG Games");
 
+            int heroType = GetHeroType();
+
+            string name = GetHeroName();
+
+            Hero hero = CreateHero(heroType, name);
+
+            int action;
+            do
+            {
+                action = GetGameAction();
+            } while (PlayGameAction(action, hero));
+        }
+
+        private static bool PlayGameAction(int action, Hero hero)
+        {
+            switch (action)
+            {
+                case 1:
+                    Fight(hero);
+                    break;
+                case 2:
+                    hero.DisplayStats();
+                    break;
+                default:
+                case 3:
+                    Console.WriteLine($"\nThanks for playing {hero.Name}!");
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static Hero CreateHero(int heroType, string name)
+        {
+            switch (heroType)
+            {
+                default:
+                case 1:
+                    return new Mage(name);
+                case 2:
+                    return new Ranger(name);
+                case 3:
+                    return new Rogue(name);
+                case 4:
+                    return new Warrior(name);
+            }
+        }
+
+        private static int GetGameAction()
+        {
+            DisplayGameOptions();
+
+            var actionInput = Console.ReadLine();
+            int action;
+            while (!int.TryParse(actionInput, out action) || action < 1 || action > 4)
+            {
+                Console.Clear();
+
+                Console.WriteLine("\nPlease enter a number between 1 and 3");
+
+                DisplayGameOptions();
+
+                actionInput = Console.ReadLine();
+            }
+
+            Console.Clear();
+            return action;
+        }
+
+        private static void DisplayGameOptions()
+        {
+            Console.WriteLine("\nWhat do you want to do?");
+            Console.WriteLine("1. Fight");
+            Console.WriteLine("2. Show my stats");
+            Console.WriteLine("3. Leave the game\n");
+        }
+
+        private static string GetHeroName()
+        {
+            Console.WriteLine("\nEnter your hero name: ");
+            string name = Console.ReadLine();
+
+            Console.Clear();
+            return name;
+        }
+
+        private static int GetHeroType()
+        {
+            DisplayHeroOptions();
+
+            var typeInput = Console.ReadLine();
+            int heroType;
+            while (!int.TryParse(typeInput, out heroType) || heroType < 1 || heroType > 4)
+            {
+                Console.Clear();
+
+                Console.WriteLine("\nPlease enter a number between 1 and 4");
+
+                DisplayHeroOptions();
+
+                typeInput = Console.ReadLine();
+            }
+
+            Console.Clear();
+            return heroType;
+        }
+
+        private static void DisplayHeroOptions()
+        {
             Console.WriteLine("\nChoose the type of your character");
             Console.WriteLine("1. Mage");
             Console.WriteLine("2. Ranger");
             Console.WriteLine("3. Rogue");
-            Console.WriteLine("4. Warrior");
-            int type = Convert.ToInt32(Console.ReadLine());
-            Console.Clear();
-
-            Console.WriteLine("\nEnter a name for your character");
-            string name = Console.ReadLine();
-            Console.Clear();
-
-            Hero hero;
-
-            switch (type)
-            {
-                default:
-                case 1:
-                    hero = new Mage(name);
-                    break;
-                case 2:
-                    hero = new Ranger(name);
-                    break;
-                case 3:
-                    hero = new Rogue(name);
-                    break;
-                case 4:
-                    hero = new Warrior(name);
-                    break;
-            }
-
-            bool playing = true;
-            while (playing)
-            {
-                Console.WriteLine("\nWhat do you want to do?");
-                Console.WriteLine("1. Fight");
-                Console.WriteLine("2. Show my stats");
-                Console.WriteLine("3. Leave the game");
-
-                int action = Convert.ToInt32(Console.ReadLine());
-                Console.Clear();
-                switch (action)
-                {
-                    case 1:
-                        Fight(hero);
-                        break;
-                    case 2:
-                        hero.DisplayStats();
-                        break;
-                    default:
-                    case 3:
-                        playing = false;
-                        break;
-                }
-            }
+            Console.WriteLine("4. Warrior\n");
         }
 
         /// <summary>
@@ -82,25 +141,35 @@ namespace RPGCharacters
 
             Console.WriteLine($"\nYour opponent is a {opponent.GetType().Name}, with a DPS of {opponent.DPS:0.##}");
 
-            if (hero.DPS < opponent.DPS)
+            PressKeyToContinue();
+
+            // Characters luck is between 0 and 20%
+            var rand = new Random();
+            double herosLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
+            double opponentsLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
+
+            if (hero.DPS * herosLuck < opponent.DPS * opponentsLuck)
             {
                 Console.WriteLine("\nYou lost, the game is over...");
+                Console.WriteLine($"\nThanks for playing {hero.Name}!");
                 Environment.Exit(0);
                 return;
             }
 
             Console.WriteLine("\nYou won!");
 
+            PressKeyToContinue();
+
+            hero.LevelUp(1);
+            Console.WriteLine($"\nYou leveled up! Your current level is {hero.Level}.");
+
+            PressKeyToContinue();
+
             Item item = CreateRandomItem();
             string typeOfItem = item.GetType().Name;
             Console.WriteLine($"\nYou found: {item.ItemDescription()}");
 
-            Console.WriteLine("\nWhat do you want to do?");
-            Console.WriteLine("1. Try to equip");
-            Console.WriteLine("2. Leave behind");
-            int action = Convert.ToInt32(Console.ReadLine());
-            Console.Clear();
-            switch (action)
+            switch (GetFoundItemAction())
             {
                 case 1:
                     try
@@ -117,18 +186,52 @@ namespace RPGCharacters
                         }
 
                         Console.WriteLine($"\n{typeOfItem} equipped!");
+                        PressKeyToContinue();
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine($"\nYou can't equip this item: {e.Message}");
+                        PressKeyToContinue();
                     }
                     break;
                 default:
                     break;
             }
 
-            hero.LevelUp(1);
-            Console.WriteLine("\nYou leveled up!");
+            
+        }
+
+        private static int GetFoundItemAction()
+        {
+            DisplayItemOptions();
+            var actionInput = Console.ReadLine();
+            int action;
+            while (!int.TryParse(actionInput, out action) || action < 1 || action > 4)
+            {
+                Console.Clear();
+                Console.WriteLine("\nPlease enter a number between 1 and 2");
+
+                DisplayItemOptions();
+
+                actionInput = Console.ReadLine();
+            }
+
+            Console.Clear();
+            return action;
+        }
+
+        private static void DisplayItemOptions()
+        {
+            Console.WriteLine("\nWhat do you want to do?");
+            Console.WriteLine("1. Try to equip");
+            Console.WriteLine("2. Leave behind\n");
+        }
+
+        private static void PressKeyToContinue()
+        {
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         /// <summary>
@@ -140,18 +243,19 @@ namespace RPGCharacters
         {
             var rand = new Random();
             int type = rand.Next(1, 5);
-            string name = "Opponent";
             int damage = rand.Next(1, level);
             double attackSpeed = rand.NextDouble() * (level - 0.1) + 0.1;
-
-            Hero opponent;
-            Weapon weapon = new Weapon()
+            
+            Weapon weapon = new()
             {
                 ItemName = "Weapon",
                 ItemLevel = level,
                 ItemSlot = Slot.SLOT_WEAPON,
                 WeaponAttributes = new WeaponAttributes() { Damage = damage, AttackSpeed = attackSpeed }
             };
+
+            Hero opponent;
+            string name = "Opponent";
 
             switch (type)
             {
@@ -220,7 +324,6 @@ namespace RPGCharacters
                         WeaponType = (WeaponType)weaponType,
                         WeaponAttributes = new WeaponAttributes() { Damage = damage, AttackSpeed = attackSpeed }
                     };
-
                     break;
                 default:
                     int slot = rand.Next(3);
@@ -238,7 +341,6 @@ namespace RPGCharacters
                         ArmorType = (ArmorType)armorType,
                         Attributes = new PrimaryAttributes() { Vitality = vitality, Strength = strength, Dexterity = dexterity, Intelligence = intelligence }
                     };
-
                     break;
             }
 
