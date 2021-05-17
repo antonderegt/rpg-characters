@@ -1,5 +1,4 @@
-﻿using RPGCharacters.Helpers;
-using RPGCharacters.Heroes;
+﻿using RPGCharacters.Heroes;
 using RPGCharacters.Games;
 using System;
 
