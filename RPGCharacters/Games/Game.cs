@@ -7,19 +7,45 @@ namespace RPGCharacters.Games
 {
     class Game
     {
-        public bool PlayGameAction(int action, Hero hero)
+        public Hero PlayerHero { get; set; }
+
+        public Game()
+        {
+            Console.WriteLine("\nWelcome to the RPG game Fake Diablo");
+            int heroType = GetHeroType();
+            string name = GetHeroName();
+            PlayerHero = CreateHero(heroType, name);
+        }
+
+        public void Play()
+        {
+            int action;
+            do
+            {
+                action = GetGameAction();
+            } while (PlayGameAction(action));
+        }
+
+        private bool PlayGameAction(int action)
         {
             switch (action)
             {
                 case 1:
-                    Fight(hero);
+                    Hero opponent = CreateRandomOpponent(PlayerHero.Level);
+
+                    // Characters luck is between 0 and 20%
+                    var rand = new Random();
+                    double herosLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
+                    double opponentsLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
+
+                    Fight(PlayerHero, opponent, herosLuck, opponentsLuck);
                     break;
                 case 2:
-                    hero.DisplayStats();
+                    PlayerHero.DisplayStats();
                     break;
                 default:
                 case 3:
-                    Console.WriteLine($"\nThanks for playing {hero.Name}!");
+                    Console.WriteLine($"\nThanks for playing {PlayerHero.Name}!");
                     return false;
             }
 
@@ -42,7 +68,7 @@ namespace RPGCharacters.Games
             }
         }
 
-        public int GetGameAction()
+        private static int GetGameAction()
         {
             DisplayGameOptions();
 
@@ -71,7 +97,7 @@ namespace RPGCharacters.Games
             Console.WriteLine("3. Leave the game\n");
         }
 
-        public string GetHeroName()
+        private static string GetHeroName()
         {
             Console.WriteLine("\nEnter your hero name: ");
             string name = Console.ReadLine();
@@ -80,7 +106,7 @@ namespace RPGCharacters.Games
             return name;
         }
 
-        public int GetHeroType()
+        private static int GetHeroType()
         {
             DisplayHeroOptions();
 
@@ -114,18 +140,11 @@ namespace RPGCharacters.Games
         /// Handles a fight between two Heroes. When the fight is lost, the game ends. When the fight is won, the player gets a random item and levels up.
         /// </summary>
         /// <param name="hero">The opponent</param>
-        private static void Fight(Hero hero)
+        private void Fight(Hero hero, Hero opponent, double herosLuck, double opponentsLuck)
         {
-            Hero opponent = CreateRandomOpponent(hero.Level);
-
             Console.WriteLine($"\nYour opponent is a {opponent.GetType().Name}, with a DPS of {opponent.DPS:0.##}");
 
             PressKeyToContinue();
-
-            // Characters luck is between 0 and 20%
-            var rand = new Random();
-            double herosLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
-            double opponentsLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
 
             if (hero.DPS * herosLuck < opponent.DPS * opponentsLuck)
             {
@@ -144,6 +163,11 @@ namespace RPGCharacters.Games
 
             PressKeyToContinue();
 
+            HandleFoundItem(hero);
+        }
+
+        private void HandleFoundItem(Hero hero)
+        {
             Item item = CreateRandomItem();
             string typeOfItem = item.GetType().Name;
             Console.WriteLine($"\nYou found: {item.ItemDescription()}");
@@ -178,7 +202,7 @@ namespace RPGCharacters.Games
             }
         }
 
-        private static int GetFoundItemAction()
+        private int GetFoundItemAction()
         {
             DisplayItemOptions();
             var actionInput = Console.ReadLine();
@@ -197,14 +221,14 @@ namespace RPGCharacters.Games
             return action;
         }
 
-        private static void DisplayItemOptions()
+        private void DisplayItemOptions()
         {
             Console.WriteLine("\nWhat do you want to do?");
             Console.WriteLine("1. Try to equip");
             Console.WriteLine("2. Leave behind\n");
         }
 
-        private static void PressKeyToContinue()
+        private void PressKeyToContinue()
         {
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
@@ -216,7 +240,7 @@ namespace RPGCharacters.Games
         /// </summary>
         /// <param name="level">Level of the hero</param>
         /// <returns>Random Hero</returns>
-        private static Hero CreateRandomOpponent(int level)
+        private Hero CreateRandomOpponent(int level)
         {
             var rand = new Random();
             int type = rand.Next(1, 5);
@@ -278,7 +302,7 @@ namespace RPGCharacters.Games
         /// Creates a random item of type Armor or Weapon with random attribute values.
         /// </summary>
         /// <returns>Random Item of type Armor or Weapon</returns>
-        private static Item CreateRandomItem()
+        private Item CreateRandomItem()
         {
             var rand = new Random();
             int type = rand.Next(0, 2);
