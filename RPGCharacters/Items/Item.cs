@@ -19,5 +19,7 @@
         public string ItemName { get; set; }
         public int ItemLevel { get; set; }
         public Slot ItemSlot { get; set; }
+
+        public abstract string ItemDescription();
     }
 }

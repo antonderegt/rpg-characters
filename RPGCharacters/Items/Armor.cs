@@ -19,5 +19,10 @@ namespace RPGCharacters.Items
     {
         public ArmorType ArmorType { get; set; }
         public PrimaryAttributes Attributes { get; set; }
+
+        public override string ItemDescription()
+        {
+            return $"Armor of type {ArmorType}";
+        }
     }
 }
