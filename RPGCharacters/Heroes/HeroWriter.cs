@@ -30,7 +30,7 @@ namespace RPGCharacters.Heroes
             stats.AppendFormat($"Health: {baseSecondaryAttributes.Health}\n");
             stats.AppendFormat($"Armor Rating: {baseSecondaryAttributes.ArmorRating}\n");
             stats.AppendFormat($"Elemental Resistance: {baseSecondaryAttributes.ElementalResistence}\n");
-            stats.AppendFormat($"DPS: {dps.ToString("0.##")}\n");
+            stats.AppendFormat($"DPS: {dps:0.##}");
 
             Console.WriteLine(stats.ToString());
         }
