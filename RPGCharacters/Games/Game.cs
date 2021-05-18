@@ -2,6 +2,7 @@
 using RPGCharacters.Heroes;
 using RPGCharacters.Items;
 using System;
+using System.Linq;
 
 namespace RPGCharacters.Games
 {
@@ -11,6 +12,7 @@ namespace RPGCharacters.Games
     public class Game
     {
         public Hero PlayerHero { get; set; }
+        private const int MaxLengthOfName = 30;
 
         /// <summary>
         /// Starts the game.
@@ -67,7 +69,7 @@ namespace RPGCharacters.Games
         /// <param name="heroType">Type of hero</param>
         /// <param name="name">Hero name</param>
         /// <returns>The created hero</returns>
-        private static Hero CreateHero(int heroType, string name)
+        private static Hero CreateHero(int heroType = 1, string name = "John Doe")
         {
             switch (heroType)
             {
@@ -126,7 +128,23 @@ namespace RPGCharacters.Games
         private static string GetHeroName()
         {
             Console.WriteLine("\nEnter your hero name: ");
+
             string name = Console.ReadLine();
+            bool nameIsValid = name.Any(c => char.IsLetterOrDigit(c));
+            bool lengthIsValid = name.Length < MaxLengthOfName;
+
+            while (name == "" || !nameIsValid || !lengthIsValid)
+            {
+                Console.Clear();
+
+                Console.WriteLine($"\nPlease enter a max of {MaxLengthOfName} letters and digits");
+
+                Console.WriteLine("\nEnter your hero name: ");
+                
+                name = Console.ReadLine();
+                nameIsValid = name.Any(c => char.IsLetterOrDigit(c));
+                lengthIsValid = name.Length < MaxLengthOfName;
+            }
 
             Console.Clear();
             return name;
