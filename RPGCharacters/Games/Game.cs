@@ -5,20 +5,18 @@ using System;
 
 namespace RPGCharacters.Games
 {
-    class Game
+    public class Game
     {
         public Hero PlayerHero { get; set; }
 
-        public Game()
+        public void Play()
         {
             Console.WriteLine("\nWelcome to the RPG game Fake Diablo");
+
             int heroType = GetHeroType();
             string name = GetHeroName();
             PlayerHero = CreateHero(heroType, name);
-        }
 
-        public void Play()
-        {
             int action;
             do
             {
@@ -52,7 +50,7 @@ namespace RPGCharacters.Games
             return true;
         }
 
-        public Hero CreateHero(int heroType, string name)
+        private static Hero CreateHero(int heroType, string name)
         {
             switch (heroType)
             {
