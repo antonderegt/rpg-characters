@@ -2,7 +2,6 @@
 using RPGCharacters.Heroes;
 using RPGCharacters.Items;
 using System;
-using System.Linq;
 
 namespace RPGCharacters.Game_Logic
 {
@@ -21,14 +20,14 @@ namespace RPGCharacters.Game_Logic
         {
             GameWriter.WelcomeMessage();
 
-            int heroType = GetHeroType();
-            string name = GetHeroName();
+            int heroType = GameReader.GetHeroType();
+            string name = GameReader.GetHeroName(MaxLengthOfName);
             PlayerHero = CreateHero(heroType, name);
 
             int action;
             do
             {
-                action = GetGameAction();
+                action = GameReader.GetGameAction();
             } while (PlayGameAction(action));
         }
 
@@ -86,91 +85,10 @@ namespace RPGCharacters.Game_Logic
         }
 
         /// <summary>
-        /// Asks the player which action they want to perform.
-        /// </summary>
-        /// <returns>Action number</returns>
-        private static int GetGameAction()
-        {
-            GameWriter.DisplayGameOptions();
-            var actionInput = GameReader.ReadLine();
-            int action;
-
-            while (!int.TryParse(actionInput, out action) || action < 1 || action > 4)
-            {
-                GameWriter.ClearScreen();
-                GameWriter.AskForNumberMessage(1, 3);
-                GameWriter.DisplayGameOptions();
-                actionInput = GameReader.ReadLine();
-            }
-
-            GameWriter.ClearScreen();
-            return action;
-        }
-
-        /// <summary>
-        /// Asks player for their hero name.
-        /// </summary>
-        /// <returns>Name of hero string</returns>
-        private static string GetHeroName()
-        {
-            GameWriter.AskForHeroNameMessage();
-            string name = GameReader.ReadLine();
-
-            while (!NameInputIsValid(name))
-            {
-                GameWriter.ClearScreen();
-                GameWriter.AskForHeroNameErrorMessage(MaxLengthOfName);
-                GameWriter.AskForHeroNameMessage();
-                name = GameReader.ReadLine();
-            }
-
-            GameWriter.ClearScreen();
-            return name;
-        }
-
-        /// <summary>
-        /// Checks if name is valid.
-        /// </summary>
-        /// <param name="name">Input name</param>
-        /// <returns>True if name is not empty, is made up of letters and digits and is smaller than 30 characters. Otherwise false</returns>
-        private static bool NameInputIsValid(string name)
-        {
-            bool nameIsNotEmpty = name != "";
-            bool nameIsValid = name.Any(c => char.IsLetterOrDigit(c));
-            bool lengthIsValid = name.Length < MaxLengthOfName;
-
-            return nameIsNotEmpty && nameIsValid && lengthIsValid;
-        }
-
-        /// <summary>
-        /// Asks the player which type of hero they want to play with.
-        /// </summary>
-        /// <returns>Hero type number</returns>
-        private static int GetHeroType()
-        {
-            GameWriter.DisplayHeroOptions();
-            var typeInput = GameReader.ReadLine();
-            int heroType;
-
-            while (!int.TryParse(typeInput, out heroType) || heroType < 1 || heroType > 4)
-            {
-                GameWriter.ClearScreen();
-                GameWriter.AskForNumberMessage(1, 4);
-                GameWriter.DisplayHeroOptions();
-                typeInput = GameReader.ReadLine();
-            }
-
-            GameWriter.ClearScreen();
-            return heroType;
-        }
-
-        
-
-        /// <summary>
         /// Handles a fight between two Heroes. When the fight is lost, the game ends. When the fight is won, the player gets a random item and levels up.
         /// </summary>
         /// <param name="hero">The opponent</param>
-        private void Fight(Hero hero, Hero opponent, double herosLuck, double opponentsLuck)
+        private static void Fight(Hero hero, Hero opponent, double herosLuck, double opponentsLuck)
         {
             GameWriter.OpponentDescriptionMessage(opponent.GetType().Name, opponent.DPS);
 
@@ -200,13 +118,13 @@ namespace RPGCharacters.Game_Logic
         /// Creates a new random item and asks the player what they want to do with it.
         /// </summary>
         /// <param name="hero">The players hero</param>
-        private void HandleFoundItem(Hero hero)
+        private static void HandleFoundItem(Hero hero)
         {
             Item item = CreateRandomItem();
             string typeOfItem = item.GetType().Name;
             GameWriter.ItemFoundMessage(item.ItemDescription());
 
-            switch (GetFoundItemAction())
+            switch (GameReader.GetFoundItemAction())
             {
                 case 1:
                     try
@@ -237,34 +155,11 @@ namespace RPGCharacters.Game_Logic
         }
 
         /// <summary>
-        /// Asks the player which item action they want to take.
-        /// </summary>
-        /// <returns>Action number</returns>
-        private int GetFoundItemAction()
-        {
-            GameWriter.DisplayItemOptions();
-            var actionInput = GameReader.ReadLine();
-            int action;
-            while (!int.TryParse(actionInput, out action) || action < 1 || action > 4)
-            {
-                GameWriter.ClearScreen();
-                GameWriter.AskForNumberMessage(1, 2);
-
-                GameWriter.DisplayItemOptions();
-
-                actionInput = GameReader.ReadLine();
-            }
-
-            GameWriter.ClearScreen();
-            return action;
-        }
-
-        /// <summary>
         /// Creates a Hero of a random type with a random weapon.
         /// </summary>
         /// <param name="level">Level of the hero</param>
         /// <returns>Random Hero</returns>
-        private Hero CreateRandomOpponent(int level)
+        private static Hero CreateRandomOpponent(int level)
         {
             var rand = new Random();
             int type = rand.Next(1, 5);
@@ -326,7 +221,7 @@ namespace RPGCharacters.Game_Logic
         /// Creates a random item of type Armor or Weapon with random attribute values.
         /// </summary>
         /// <returns>Random Item of type Armor or Weapon</returns>
-        private Item CreateRandomItem()
+        private static Item CreateRandomItem()
         {
             var rand = new Random();
             int type = rand.Next(0, 2);
