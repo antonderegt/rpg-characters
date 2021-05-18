@@ -15,7 +15,7 @@ namespace RPGCharacters.Helpers
         /// Checks if two SecondaryAttributes objects are equal.
         /// </summary>
         /// <param name="obj">Object to compare to</param>
-        /// <returns>Whether objects are equal</returns>
+        /// <returns>True if objects are equal, otherwise false</returns>
         public override bool Equals(object obj)
         {
             return obj is SecondaryAttributes attributes &&
