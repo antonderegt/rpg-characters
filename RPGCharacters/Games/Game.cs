@@ -130,10 +130,8 @@ namespace RPGCharacters.Games
             Console.WriteLine("\nEnter your hero name: ");
 
             string name = Console.ReadLine();
-            bool nameIsValid = name.Any(c => char.IsLetterOrDigit(c));
-            bool lengthIsValid = name.Length < MaxLengthOfName;
 
-            while (name == "" || !nameIsValid || !lengthIsValid)
+            while (!NameInputIsValid(name))
             {
                 Console.Clear();
 
@@ -142,12 +140,24 @@ namespace RPGCharacters.Games
                 Console.WriteLine("\nEnter your hero name: ");
                 
                 name = Console.ReadLine();
-                nameIsValid = name.Any(c => char.IsLetterOrDigit(c));
-                lengthIsValid = name.Length < MaxLengthOfName;
             }
 
             Console.Clear();
             return name;
+        }
+
+        /// <summary>
+        /// Checks if name is valid.
+        /// </summary>
+        /// <param name="name">Input name</param>
+        /// <returns>True if name is not empty, is made up of letters and digits and is smaller than 30 characters. Otherwise false</returns>
+        private static bool NameInputIsValid(string name)
+        {
+            bool nameIsNotEmpty = name != "";
+            bool nameIsValid = name.Any(c => char.IsLetterOrDigit(c));
+            bool lengthIsValid = name.Length < MaxLengthOfName;
+
+            return nameIsNotEmpty && nameIsValid && lengthIsValid;
         }
 
         /// <summary>
