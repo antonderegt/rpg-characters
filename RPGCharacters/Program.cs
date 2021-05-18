@@ -1,4 +1,4 @@
-﻿using RPGCharacters.Games;
+﻿using RPGCharacters.Game_Logic;
 
 namespace RPGCharacters
 {
