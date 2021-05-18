@@ -43,7 +43,7 @@ namespace RPGCharacters.Game_Logic
         }
 
         /// <summary>
-        /// Outputs all game options.
+        /// Prints all game options.
         /// </summary>
         public static void DisplayGameOptions()
         {
@@ -54,7 +54,7 @@ namespace RPGCharacters.Game_Logic
         }
 
         /// <summary>
-        /// Outputs all available heroes.
+        /// Prints all available heroes.
         /// </summary>
         public static void DisplayHeroOptions()
         {
@@ -66,7 +66,7 @@ namespace RPGCharacters.Game_Logic
         }
 
         /// <summary>
-        /// Outputs all available item actions.
+        /// Prints all available item actions.
         /// </summary>
         public static void DisplayItemOptions()
         {
@@ -85,46 +85,82 @@ namespace RPGCharacters.Game_Logic
             ClearScreen();
         }
 
+        /// <summary>
+        /// Asks for hero name.
+        /// </summary>
         public static void AskForHeroNameMessage()
         {
             Console.WriteLine("\nEnter your hero name: ");
         }
 
+        /// <summary>
+        /// Prints hero name error message.
+        /// </summary>
+        /// <param name="length">Max length of input</param>
         public static void AskForHeroNameErrorMessage(int length)
         {
             Console.WriteLine($"\nPlease enter a max of {length} letters and digits");
         }
 
+
+        /// <summary>
+        /// Prints game lost message.
+        /// </summary>
         public static void GameLostMessage()
         {
             Console.WriteLine("\nYou lost, the game is over...");
         }
 
+        /// <summary>
+        /// Prints game won message.
+        /// </summary>
         public static void GameWonMessage()
         {
             Console.WriteLine("\nYou won!");
         }
 
+
+        /// <summary>
+        /// Prints level up message.
+        /// </summary>
+        /// <param name="level">Current level of Hero</param>
         public static void LevelUpMessage(int level)
         {
             Console.WriteLine($"\nYou leveled up! Your current level is {level}.");
         }
 
+        /// <summary>
+        /// Prints opponent description.
+        /// </summary>
+        /// <param name="type">Type of opponent; Mage/Ranger/Rogue/Warrior</param>
+        /// <param name="dps">Damage per second</param>
         public static void OpponentDescriptionMessage(string type, double dps)
         {
             Console.WriteLine($"\nYour opponent is a {type}, with a DPS of {dps:0.##}");
         }
 
+        /// <summary>
+        /// Prints item found message.
+        /// </summary>
+        /// <param name="itemDescription"></param>
         public static void ItemFoundMessage(string itemDescription)
         {
             Console.WriteLine($"\nYou found: {itemDescription}");
         }
 
+        /// <summary>
+        /// Prints item equipped message.
+        /// </summary>
+        /// <param name="itemDescription">Item description</param>
         public static void ItemEquippedMessage(string itemDescription)
         {
             Console.WriteLine($"\n{itemDescription} equipped!");
         }
 
+        /// <summary>
+        /// Prints item equipped error message.
+        /// </summary>
+        /// <param name="message">Error message</param>
         public static void ItemEquippedErrorMessage(string message)
         {
             Console.WriteLine($"\nYou can't equip this item: {message}");
