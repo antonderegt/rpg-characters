@@ -5,10 +5,16 @@ using System;
 
 namespace RPGCharacters.Games
 {
+    /// <summary>
+    /// Game logic for the RPG game.
+    /// </summary>
     public class Game
     {
         public Hero PlayerHero { get; set; }
 
+        /// <summary>
+        /// Starts the game.
+        /// </summary>
         public void Play()
         {
             Console.WriteLine("\nWelcome to the RPG game Fake Diablo");
@@ -24,6 +30,11 @@ namespace RPGCharacters.Games
             } while (PlayGameAction(action));
         }
 
+        /// <summary>
+        /// Calls the actions the player specified.
+        /// </summary>
+        /// <param name="action">Action entered by player</param>
+        /// <returns>True if game continues, false if game ended</returns>
         private bool PlayGameAction(int action)
         {
             switch (action)
@@ -31,7 +42,7 @@ namespace RPGCharacters.Games
                 case 1:
                     Hero opponent = CreateRandomOpponent(PlayerHero.Level);
 
-                    // Characters luck is between 0 and 20%
+                    // Characters get a luck bonus on their DPS between 0 and 20%
                     var rand = new Random();
                     double herosLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
                     double opponentsLuck = rand.NextDouble() * (1.2 - 1.0) + 1.0;
@@ -50,6 +61,12 @@ namespace RPGCharacters.Games
             return true;
         }
 
+        /// <summary>
+        /// Creates the players hero.
+        /// </summary>
+        /// <param name="heroType">Type of hero</param>
+        /// <param name="name">Hero name</param>
+        /// <returns>The created hero</returns>
         private static Hero CreateHero(int heroType, string name)
         {
             switch (heroType)
@@ -66,6 +83,10 @@ namespace RPGCharacters.Games
             }
         }
 
+        /// <summary>
+        /// Asks the player which action they want to perform.
+        /// </summary>
+        /// <returns>Action number</returns>
         private static int GetGameAction()
         {
             DisplayGameOptions();
@@ -87,6 +108,9 @@ namespace RPGCharacters.Games
             return action;
         }
 
+        /// <summary>
+        /// Outputs all game options.
+        /// </summary>
         private static void DisplayGameOptions()
         {
             Console.WriteLine("\nWhat do you want to do?");
@@ -95,6 +119,10 @@ namespace RPGCharacters.Games
             Console.WriteLine("3. Leave the game\n");
         }
 
+        /// <summary>
+        /// Asks player for their hero name.
+        /// </summary>
+        /// <returns>Name of hero string</returns>
         private static string GetHeroName()
         {
             Console.WriteLine("\nEnter your hero name: ");
@@ -104,6 +132,10 @@ namespace RPGCharacters.Games
             return name;
         }
 
+        /// <summary>
+        /// Asks the player which type of hero they want to play with.
+        /// </summary>
+        /// <returns>Hero type number</returns>
         private static int GetHeroType()
         {
             DisplayHeroOptions();
@@ -125,6 +157,9 @@ namespace RPGCharacters.Games
             return heroType;
         }
 
+        /// <summary>
+        /// Outputs all available heroes.
+        /// </summary>
         private static void DisplayHeroOptions()
         {
             Console.WriteLine("\nChoose the type of your character");
@@ -164,6 +199,10 @@ namespace RPGCharacters.Games
             HandleFoundItem(hero);
         }
 
+        /// <summary>
+        /// Creates a new random item and asks the player what they want to do with it.
+        /// </summary>
+        /// <param name="hero">The players hero</param>
         private void HandleFoundItem(Hero hero)
         {
             Item item = CreateRandomItem();
@@ -200,6 +239,10 @@ namespace RPGCharacters.Games
             }
         }
 
+        /// <summary>
+        /// Asks the player which item action they want to take.
+        /// </summary>
+        /// <returns>Action number</returns>
         private int GetFoundItemAction()
         {
             DisplayItemOptions();
@@ -219,6 +262,9 @@ namespace RPGCharacters.Games
             return action;
         }
 
+        /// <summary>
+        /// Outputs all available item actions.
+        /// </summary>
         private void DisplayItemOptions()
         {
             Console.WriteLine("\nWhat do you want to do?");
@@ -226,6 +272,9 @@ namespace RPGCharacters.Games
             Console.WriteLine("2. Leave behind\n");
         }
 
+        /// <summary>
+        /// Waits for user to press a key to continue the game.
+        /// </summary>
         private void PressKeyToContinue()
         {
             Console.WriteLine("\nPress any key to continue...");
